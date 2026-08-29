@@ -15,22 +15,32 @@
 - **Python 3.10+**（默认 `python`，可用配置覆盖）
 - 一个**带符号/源码的 Debug 构建**（PDB，源码行断点用）
 
-## 安装
+## 安装（标准组合包方式）
+
+这是一个声明了 `dsh.bundle` 的组合包（bundle），直接用 `dsh plugin` 装进 profile：
 
 ```sh
 dsh plugin --profile web add dsh-cpp-probe
 ```
 
+装好后它会自动把 `cpp-probe` 插件层加入该 profile 的 bundle 层，并注册 `cpp_trace` / `cpp_probe` 两个工具。安装后需**重启 `dsh web`** 才会生效。
+
+> 发布：本插件发布在 npm（`dsh-cpp-probe`）。也可以用 GitHub 源码规格安装：
+> ```sh
+> dsh plugin --profile web add github:cuiyuexin428/dsh-cpp-probe
+> ```
+
 ## 配置
 
-在 agent 预设的 `agent.cordis.yml` 里加一行：
+插件默认配置在 `cordis.patch.yml` 的 `config` 里（随包携带）。**不需要**手动改 `agent.cordis.yml`。要覆盖默认值，用你 profile 的 `cordis.patch.yml` 按 id 覆写：
 
 ```yaml
+# $DSH_HOME/profiles/<name>/cordis.patch.yml
 - id: cpp-probe
-  name: 'dsh-cpp-probe'
   config:
     python: python                                    # python 可执行(默认 python)
-    cdbPath: 'C:\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe'   # cdb 绝对路径
+    defaultTimeoutSeconds: 120                        # 整次超时(秒)
+    cdbPath: 'C:\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe'   # cdb 绝对路径(按你的环境改)
     symbolPaths: ['C:\\path\\to\\build\\bin\\Debug']  # 你的 PDB/DLL 目录
     sourcePaths: ['C:\\path\\to\\src']                # 源码根目录
 ```
