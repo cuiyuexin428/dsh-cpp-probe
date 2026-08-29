@@ -1,0 +1,9 @@
+- insert:
+    - id: cpp-probe
+      name: dsh-cpp-probe
+      config:
+        python: python                                    # python 可执行(默认 python)
+        defaultTimeoutSeconds: 120                        # 整次超时(秒)
+        cdbPath: 'C:\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe'   # cdb 绝对路径(按你的环境改)
+        symbolPaths: []                                   # 你的 PDB/DLL 目录
+        sourcePaths: []                                   # 源码根目录
