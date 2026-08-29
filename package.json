@@ -2,8 +2,8 @@
   "name": "dsh-cpp-probe",
   "version": "0.1.0",
   "type": "module",
-  "description": "C++ 运行时信息探针: cpp_trace(多断点打印变量, 替换 print) + cpp_probe(条件断点输出调用栈), 给 AI 提供程序运行时信息(Windows/CDB)",
   "license": "MIT",
+  "description": "C++ 运行时信息探针: cpp_trace(多断点打印变量, 替换 print) + cpp_probe(条件断点输出调用栈), 给 AI 提供程序运行时信息(Windows/CDB)",
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js",
@@ -12,6 +12,30 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/cuiyuexin428/dsh-cpp-probe"
+  },
+  "files": [
+    "lib/**",
+    "cordis.patch.yml",
+    "cbd_runner.py",
+    "live_bp.py",
+    "trace_bp.py",
+    "ttd_bp.py",
+    "config.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": "^0.1.0",
+    "@deepseek-ai/schemastery": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-tools": { "optional": true },
+    "@deepseek-ai/schemastery": { "optional": true }
   },
   "dependencies": {},
   "engines": {
